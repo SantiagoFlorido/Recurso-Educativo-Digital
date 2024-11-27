@@ -1,0 +1,61 @@
+/* Aseguramos que el body y html tengan un tamaño completo de la ventana */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Asegura que el padding no afecte al tamaño total */
+  }
+  
+  /* Estilo para el contenedor principal con borde blanco exterior */
+  .container {
+    width: 100%;
+    height: 100vh; /* Ocupa toda la altura de la ventana */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: rgb(26, 179, 26); /* Fondo claro */
+    padding: 20px; /* Separar los bordes interior y exterior */
+    border: 10px solid white; /* Borde blanco exterior */
+  }
+  
+  /* Contenedor interior con borde verde */
+  .inner-container {
+    width: 1000vh; /* Mantener el ancho como está */
+    height: 95vh; /* Ocupa toda la altura de la ventana */
+    padding: 20px; /* Espacio entre el borde verde y el contenido */
+    padding-top: 20px;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+    border: 5px solid white; /* Borde verde interior */
+    background-color: white; /* Fondo blanco para el contenido */
+    display: flex;
+    flex-direction: column; /* Para alinear las imágenes en columna */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative; /* Para poder posicionar logo1 de manera absoluta */
+  }
+  
+  /* Estilo para el logo1 */
+  .logo1 {
+    width: 200px;
+    height: 100px;
+    position: absolute; /* Posicionarlo de manera absoluta */
+    top: 20px; /* Alineado en la parte superior */
+    left: 20px; /* Alineado a la izquierda */
+    margin: 0;
+  }
+  
+  /* Estilo para el logo2 */
+  .logo2 {
+    width: 900px;
+    height: 500px;
+  }
+  
+  /* Estilo para la bandera */
+  .bandera {
+    width: 600px;
+    height: 300px;
+  }
+  
