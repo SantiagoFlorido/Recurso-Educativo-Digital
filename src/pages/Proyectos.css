@@ -1,33 +1,27 @@
 /* Aseguramos que el body y html tengan un tamaño completo de la ventana */
-html,
-body {
+html, body {
     height: 100%;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-/* Estilo para el contenedor principal con borde blanco exterior */
-.container {
+  }
+  
+  /* Estilo para el contenedor principal con borde blanco exterior */
+  .container {
     width: 100%;
     height: 100vh;
-    /* Ocupa toda la altura de la ventana */
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    /* Alineación al principio para evitar que el logo se mueva */
     box-sizing: border-box;
-    background-color: rgb(26, 179, 26);
-    /* Fondo claro */
-    padding: 20px;
-    /* Separar los bordes interior y exterior */
-    border: 10px solid white;
-    /* Borde blanco exterior */
-    overflow: hidden;
-    /* Evitar que el contenido se desborde del contenedor */
-}
-
-.logo1 {
+    background-color: rgb(26, 179, 26); /* Fondo claro */
+    padding: 20px; /* Separar los bordes interior y exterior */
+    border: 10px solid white; /* Borde blanco exterior */
+    overflow: hidden; /* Evitar que el contenido se desborde del contenedor */
+  }
+  
+  /* Logo */
+  .logo1 {
     width: 200px;
     height: 100px;
     position: absolute;
@@ -35,37 +29,26 @@ body {
     left: 20px;
     z-index: 10;
     cursor: pointer; /* Indica que es clicable */
-}
-
-
-/* Estilo de los contenedores de los proyectos */
-.projects {
+  }
+  
+  /* Estilo de los contenedores de los proyectos */
+  .projects {
     display: flex;
     flex-wrap: wrap;
-    /* Permite que los proyectos se acomoden en filas */
     justify-content: center;
-    /* Centramos los proyectos */
     gap: 20px;
-    width: calc(100% - 400px);
-    /* Reducimos el ancho para dar espacio a los lados */
+    width: calc(100% - 400px); /* Reducimos el ancho para dar espacio a los lados */
     margin-top: 140px;
-    /* Separar un poco de la parte superior para no superponerse con el logo */
     box-sizing: border-box;
-    overflow-y: auto;
-    /* Permitir desplazamiento vertical si el contenido es largo */
-    max-height: calc(100vh - 140px);
-    /* Ajustar la altura para no sobrepasar el contenedor */
-    padding: 0 30px;
-    /* Espaciado lateral */
-}
-
-
-/* Estilo de cada tarjeta de proyecto */
-.project-card {
-    width: calc(50% - 10px);
-    /* Asegura que quepan dos por fila y el espacio entre ellas */
+    overflow-y: auto; /* Permitir desplazamiento vertical si el contenido es largo */
+    max-height: calc(100vh - 140px); /* Ajustar la altura para no sobrepasar el contenedor */
+    padding: 0 30px; /* Espaciado lateral */
+  }
+  
+  /* Estilo de cada tarjeta de proyecto */
+  .project-card {
+    width: calc(50% - 10px); /* Dos por fila */
     background-color: black;
-    /* Fondo negro */
     padding: 7px;
     box-sizing: border-box;
     text-align: center;
@@ -73,31 +56,43 @@ body {
     flex-direction: column;
     justify-content: center;
     margin-bottom: 20px;
-    /* Asegura espacio entre las filas */
-    /* Asegura que no se desborden */
     max-width: calc(50% - 10px);
-}
-
-/* Imagen y título del proyecto */
-.project-image {
-    background-color: rgba(21, 96, 130, 0.7);
-    /* Fondo azul opaco */
+    height: auto;
+    max-width: 500px; /* Limita el ancho máximo de cada tarjeta */
+  }
+  
+  /* Imagen y título del proyecto */
+  .project-image {
+    background-color: rgba(21, 96, 130, 0.7); /* Fondo azul opaco */
     color: white;
     font-size: 1.5rem;
-    padding: 20px;
-    margin-bottom: 10px;
-    height: 200px;
+    padding: 0; /* Eliminar padding */
+    margin-bottom: 10px; /* Eliminar márgenes */
+    height: 200px; /* Altura fija */
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-}
-
-.project-title {
-    background-color: rgba(21, 96, 130, 0.7);
-    /* Fondo azul opaco */
+    width: 100%; /* Asegura que ocupe todo el ancho */
+    overflow: hidden; /* Evita desbordes */
+  }
+  
+  /* Ajuste de la imagen dentro del contenedor */
+  .project-image img {
+    width: 100%; /* Asegura que la imagen ocupe todo el ancho */
+    height: 100%; /* Hace que la imagen ocupe toda la altura */
+    object-fit: cover; /* Asegura que la imagen se recorte adecuadamente y ocupe todo el contenedor */
+    object-position: center; /* Centra la imagen para mejorar el recorte */
+    display: block; /* Asegura que no haya espacio debajo de la imagen */
+    margin: 0; /* Eliminar margenes */
+  }
+  
+  /* Título del proyecto */
+  .project-title {
+    background-color: rgba(21, 96, 130, 0.7); /* Fondo azul opaco */
     color: white;
     font-size: 1.2rem;
     padding: 10px;
     cursor: pointer;
-}
+  }
+  
