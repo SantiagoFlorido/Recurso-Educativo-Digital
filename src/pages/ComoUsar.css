@@ -1,14 +1,11 @@
-/* Estilo para el contenedor de contenido con borde verde */
+/* Contenedor de contenido con borde verde */
 .content {
-    width: 100%;
+    width: 65%;
     height: 100%;
     background-color: white;
-    /* Fondo blanco */
     padding: 20px;
-    /* Aumentamos el espacio dentro del contenedor para agrandar el área blanca */
     box-sizing: border-box;
     overflow: hidden;
-    /* Evitar que el contenido se desborde */
 }
 
 /* Logo */
@@ -19,7 +16,7 @@
     top: 20px;
     left: 20px;
     z-index: 10;
-    cursor: pointer; /* Indica que es clicable */
+    cursor: pointer;
 }
 
 /* Título del taller */
@@ -36,4 +33,32 @@ iframe {
     height: 90%;
     border: none;
     box-sizing: border-box;
+}
+
+/* Botón siguiente */
+.next-button {
+    position: absolute;
+    top: 80%;
+    right: 10%;
+    background-color: white;
+    border: 2px solid #1976d2;
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.next-button:hover {
+    background-color: #1976d2;
+    color: #1976d2;
+    transform: scale(1.1);
+}
+
+.button{
+    position: absolute;
+    top: 84%;
+    right: 3%;
+    background-color: transparent;
+    border: transparent;
 }

@@ -1,6 +1,8 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './ComoUsar.css';
+import IconButton from '@mui/material/IconButton';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const ComoUsar = () => {
   const navigate = useNavigate();
@@ -28,6 +30,15 @@ const ComoUsar = () => {
             src={`src/talleres/${taller}`} // Ruta del PDF
             title={taller}
           />
+          <div className='button'>
+            {/* Botón siguiente */}
+            <IconButton
+                className="next-button"
+                onClick={() => navigate('/Conexion')}
+              >
+                <ArrowForwardIcon style={{ fontSize: '5rem' }} />
+              </IconButton>
+          </div>
         </div>
       </div>
     </div>

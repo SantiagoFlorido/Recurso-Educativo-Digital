@@ -6,19 +6,7 @@ html, body {
     box-sizing: border-box;
   }
   
-  /* Estilo para el contenedor principal con borde blanco exterior */
-  .container {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    box-sizing: border-box;
-    background-color: rgb(26, 179, 26); /* Fondo claro */
-    padding: 20px; /* Separar los bordes interior y exterior */
-    border: 10px solid white; /* Borde blanco exterior */
-    overflow: hidden; /* Evitar que el contenido se desborde del contenedor */
-  }
+
   
   /* Logo */
   .logo1 {

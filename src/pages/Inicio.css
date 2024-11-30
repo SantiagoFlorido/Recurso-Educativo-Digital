@@ -14,15 +14,17 @@ html, body {
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
+    align-items: flex-start;
     background-color: rgb(26, 179, 26); /* Fondo claro */
     padding: 20px; /* Separar los bordes interior y exterior */
+    
     border: 10px solid white; /* Borde blanco exterior */
   }
   
   /* Contenedor interior con borde verde */
   .inner-container {
-    width: 1000vh; /* Mantener el ancho como está */
-    height: 95vh; /* Ocupa toda la altura de la ventana */
+    width: 110%; /* Mantener el ancho como está */
+    height: 100%; /* Ocupa toda la altura de la ventana */
     padding: 20px; /* Espacio entre el borde verde y el contenido */
     padding-top: 20px;
     padding-bottom: 20px;
@@ -49,14 +51,14 @@ html, body {
   
   /* Estilo para el logo2 */
   .logo2 {
-    width: 900px;
-    height: 500px;
+    width: 50%;
+    height: 48%;
   }
   
   /* Estilo para la bandera */
   .bandera {
-    width: 600px;
-    height: 300px;
+    width: 35%;
+    height: 33%;
   }
   
   /* Loader ubicado en la parte inferior derecha */
