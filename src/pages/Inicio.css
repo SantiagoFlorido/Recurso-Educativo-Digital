@@ -41,12 +41,13 @@ html, body {
   
   /* Estilo para el logo1 */
   .logo1 {
-    width: 200px;
-    height: 100px;
+    width: 14%;
+    height: 14%;
     position: absolute; /* Posicionarlo de manera absoluta */
-    top: 20px; /* Alineado en la parte superior */
-    left: 20px; /* Alineado a la izquierda */
+    top: 1%; /* Alineado en la parte superior */
+    left: 1%; /* Alineado a la izquierda */
     margin: 0;
+    cursor: pointer;
   }
   
   /* Estilo para el logo2 */

@@ -1,24 +1,4 @@
-/* Aseguramos que el body y html tengan un tamaño completo de la ventana */
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
 
-  
-  /* Logo */
-  .logo1 {
-    width: 200px;
-    height: 100px;
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    z-index: 10;
-    cursor: pointer; /* Indica que es clicable */
-  }
-  
   /* Estilo de los contenedores de los proyectos */
   .projects {
     display: flex;
@@ -45,7 +25,7 @@ html, body {
     justify-content: center;
     margin-bottom: 20px;
     max-width: calc(50% - 10px);
-    height: auto;
+    height: 40%;
     max-width: 500px; /* Limita el ancho máximo de cada tarjeta */
   }
   
