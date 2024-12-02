@@ -1,0 +1,70 @@
+/* Contenedor de los botones de conexión */
+.conexion {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 7%;
+    width: calc(100% - 400px); /* Reducimos el ancho para dar espacio a los lados */
+}
+
+.titulo-conexion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute; /* Posicionarlo de manera absoluta */
+    top: 8%;
+}
+
+/* Botón de conexión Bluetooth */
+.button-blue {
+    background-color: #007AFF; /* Color azul típico del Bluetooth */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.button-blue:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.button-blue:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Botón de conexión por puerto COM */
+.button-com {
+    background-color: #FF9500; /* Color naranja */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.button-com:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.button-com:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
+}
