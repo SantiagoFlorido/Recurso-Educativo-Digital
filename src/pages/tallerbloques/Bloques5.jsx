@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import ScratchBlocks from "scratchblocks-react";
-import "./Bloques.css";
+import "./tallerbloques.css";
 import { useNavigate } from "react-router-dom";
 import scratchblocks from "scratchblocks";
 import es from "scratchblocks/locales/es.json";
@@ -96,7 +96,7 @@ const Bloques = () => {
           src="src/images/logo.webp"
           alt="logo"
           className="logo1"
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/Proyectos")}
         />
         {/* Contenido principal */}
         <div className="main-content">
@@ -135,6 +135,9 @@ const Bloques = () => {
               <h1 className="editor-title">Editor de Bloques</h1>
               <button className="load-button" onClick={cargarAlMbot}>
                 Cargar al mBot
+              </button>
+              <button className="load-button" onClick={() => navigate('/Felicitaciones')}>
+                Finalizar Actividad
               </button>
             </header>
             <div

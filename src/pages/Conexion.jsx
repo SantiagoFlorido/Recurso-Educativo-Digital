@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Conexion.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import BluetoothIcon from '@mui/icons-material/Bluetooth'; // Icono de Bluetooth
@@ -9,6 +9,17 @@ import axios from 'axios';
 
 const Conexion = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { state } = location || {}; // Obtenemos el estado pasado desde ComoUsar
+  const taller = state?.taller; // Accedemos al taller desde el estado
+
+  // Verifica si se pasó un taller
+  if (!taller) {
+    return <p>No se seleccionó ningún taller.</p>;
+  }
+
+  const { id } = taller; // Accedemos al id del taller
+
   const [isConnected, setIsConnected] = useState(false);
   const [deviceName, setDeviceName] = useState('');
   const [comPorts, setComPorts] = useState([]);
@@ -43,6 +54,20 @@ const Conexion = () => {
     }
   };
 
+  // Lógica para redirigir a la ruta adecuada según el id del taller
+  const getNextRoute = () => {
+    switch (id) {
+      case 3:
+        return '/bloques3'; // Para el Taller 3
+      case 4:
+        return '/bloques4'; // Para el Taller 4
+      case 5:
+        return '/bloques5'; // Para el Taller 5
+      default:
+        return '/bloques'; // Ruta por defecto (en caso de que no sea Taller 3, 4 o 5)
+    }
+  };
+
   return (
     <div className="container">
       <div className="inner-container">
@@ -50,7 +75,7 @@ const Conexion = () => {
           src="src/images/logo.webp"
           alt="logo"
           className="logo1"
-          onClick={() => navigate('/')}
+          onClick={() => navigate('/Proyectos')}
         />
         <h1 className="titulo-conexion">Selecciona según el método de conexión para el Mbot</h1>
         <div className="conexion">
@@ -74,7 +99,7 @@ const Conexion = () => {
             )}
           </div>
           <div className="button">
-            <IconButton className="next-button" onClick={() => navigate('/Bloques')}>
+            <IconButton className="next-button" onClick={() => navigate(getNextRoute())}>
               <ArrowForwardIcon style={{ fontSize: '5rem' }} />
             </IconButton>
           </div>

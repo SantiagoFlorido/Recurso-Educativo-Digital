@@ -4,7 +4,12 @@ import './App.css';
 import Conexion from './pages/Conexion';
 import ComoUsar from './pages/ComoUsar';
 import Proyectos from './pages/Proyectos';
-import Bloques from './pages/Bloques'
+import Bloques from './pages/Bloques';
+import Bloques1 from './pages/tallerbloques/Bloques1';
+import Bloques3 from './pages/tallerbloques/Bloques3';
+import Bloques4 from './pages/tallerbloques/Bloques4';
+import Bloques5 from './pages/tallerbloques/Bloques5';
+import Felicitaciones from './pages/Felicitaciones';
 
 function App() {
   return (
@@ -15,6 +20,15 @@ function App() {
         <Route path="/Uso" element={<ComoUsar />} />
         <Route path="/Proyectos" element={<Proyectos />} />
         <Route path="/Bloques" element={<Bloques/>}/>
+
+        {/*bloques por taller  (BloquesX) x=numero de taller*/}
+        <Route path="/Bloques1" element={<Bloques1/>}/>
+        <Route path="/Bloques3" element={<Bloques3/>}/>
+        <Route path="/Bloques4" element={<Bloques4/>}/>
+        <Route path="/Bloques5" element={<Bloques5/>}/>
+
+        <Route path="/Felicitaciones" element={<Felicitaciones/>}/>
+
         {/* Ruta para todas las demás páginas no encontradas */}
         <Route path="*" element={<Inicio />} />
       </Routes>
