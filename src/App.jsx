@@ -5,6 +5,7 @@ import Conexion from './pages/Conexion';
 import ComoUsar from './pages/ComoUsar';
 import Proyectos from './pages/Proyectos';
 import Bloques from './pages/Bloques';
+import BloquesTest from './pages/BloquesTest';
 import Bloques1 from './pages/tallerbloques/Bloques1';
 import Bloques3 from './pages/tallerbloques/Bloques3';
 import Bloques4 from './pages/tallerbloques/Bloques4';
@@ -19,7 +20,10 @@ function App() {
         <Route path="/Conexion" element={<Conexion />} />
         <Route path="/Uso" element={<ComoUsar />} />
         <Route path="/Proyectos" element={<Proyectos />} />
+        
+        {/*Rutas de test */}
         <Route path="/Bloques" element={<Bloques/>}/>
+        <Route path="/BloquesTest" element={<BloquesTest/>}/>
 
         {/*bloques por taller  (BloquesX) x=numero de taller*/}
         <Route path="/Bloques1" element={<Bloques1/>}/>

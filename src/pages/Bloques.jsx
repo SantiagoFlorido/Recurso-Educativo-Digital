@@ -1,91 +1,189 @@
-import React, { useState, useRef } from "react";
-import ScratchBlocks from "scratchblocks-react";
+import React, { useEffect, useRef } from "react";
+import * as Blockly from "blockly/core";
+import "blockly/blocks";
+import "blockly/javascript";
 import "./Bloques.css";
 import { useNavigate } from "react-router-dom";
-import scratchblocks from "scratchblocks";
-import es from "scratchblocks/locales/es.json";
-
-// Configurar scratchblocks con idioma español
-scratchblocks.loadLanguages({ es });
 
 const Bloques = () => {
   const navigate = useNavigate();
-  const [codigo, setCodigo] = useState(""); // Mantener el código de bloques
-  const [categorias, setCategorias] = useState([
-    {
-      id: 1,
-      nombre: "Movimiento",
-      bloques: ["mover (1) pasos", "girar a la derecha (45) grados"],
-    },
-    {
-      id: 2,
-      nombre: "Control",
-      bloques: ["esperar (5) segundos", "repetir (1)"],
-    },
-    {
-      id: 3,
-      nombre: "Eventos",
-      bloques: [
-        "al hacer clic en @greenFlag",
-        "al presionar tecla (spacebar)",
-      ],
-    },
-  ]);
+  const workspaceRef = useRef(null);
 
-  // Función para agregar el bloque arrastrado al área de trabajo
-  const manejarDrop = (e) => {
-    e.preventDefault();
-    const data = e.dataTransfer.getData("text");
-    setCodigo((prevCodigo) => `${prevCodigo}\n${data}`);
-  };
+  useEffect(() => {
+    // Configurar Blockly
+    const workspace = Blockly.inject(workspaceRef.current, {
+      toolbox: {
+        kind: "categoryToolbox",
+        contents: [
+          {
+            kind: "category",
+            name: "Movimiento",
+            contents: [
+              {
+                kind: "block",
+                type: "move_steps",
+              },
+              {
+                kind: "block",
+                type: "turn_right",
+              },
+              {
+                kind: "block",
+                type: "turn_left",
+              },
+            ],
+          },
+          {
+            kind: "category",
+            name: "Control",
+            contents: [
+              {
+                kind: "block",
+                type: "wait_seconds",
+              },
+              {
+                kind: "block",
+                type: "repeat_times",
+              },
+            ],
+          },
+          {
+            kind: "category",
+            name: "Eventos",
+            contents: [
+              {
+                kind: "block",
+                type: "when_flag_clicked",
+              },
+              {
+                kind: "block",
+                type: "when_key_pressed",
+              },
+            ],
+          },
+        ],
+      },
+      grid: { spacing: 20, length: 3, colour: "#ccc", snap: true },
+      zoom: { controls: true, wheel: true },
+      trashcan: true,
+    });
 
-  // Función para permitir el "drop" en el área de trabajo
-  const permitirDrop = (e) => {
-    e.preventDefault();
-  };
+    // Crear bloques personalizados
+    Blockly.defineBlocksWithJsonArray([
+      {
+        type: "move_steps",
+        message0: "mover %1 pasos",
+        args0: [
+          {
+            type: "field_number",
+            name: "STEPS",
+            value: 10,
+          },
+        ],
+        previousStatement: null,
+        nextStatement: null,
+        colour: 230,
+      },
+      {
+        type: "turn_right",
+        message0: "girar a la derecha %1 grados",
+        args0: [
+          {
+            type: "field_angle",
+            name: "ANGLE",
+            angle: 90,
+          },
+        ],
+        previousStatement: null,
+        nextStatement: null,
+        colour: 160,
+      },
+      {
+        type: "turn_left",
+        message0: "girar a la izquierda %1 grados",
+        args0: [
+          {
+            type: "field_angle",
+            name: "ANGLE",
+            angle: 90,
+          },
+        ],
+        previousStatement: null,
+        nextStatement: null,
+        colour: 160,
+      },
+      {
+        type: "wait_seconds",
+        message0: "esperar %1 segundos",
+        args0: [
+          {
+            type: "field_number",
+            name: "SECONDS",
+            value: 1,
+            min: 0,
+          },
+        ],
+        previousStatement: null,
+        nextStatement: null,
+        colour: 120,
+      },
+      {
+        type: "repeat_times",
+        message0: "repetir %1 veces",
+        args0: [
+          {
+            type: "field_number",
+            name: "TIMES",
+            value: 10,
+            min: 1,
+          },
+        ],
+        message1: "%1",
+        args1: [
+          {
+            type: "input_statement",
+            name: "DO",
+          },
+        ],
+        previousStatement: null,
+        nextStatement: null,
+        colour: 260,
+      },
+      {
+        type: "when_flag_clicked",
+        message0: "cuando se hace clic en la bandera verde",
+        nextStatement: null,
+        colour: 290,
+      },
+      {
+        type: "when_key_pressed",
+        message0: "cuando se presiona la tecla %1",
+        args0: [
+          {
+            type: "field_dropdown",
+            name: "KEY",
+            options: [
+              ["espacio", "SPACE"],
+              ["flecha arriba", "UP"],
+              ["flecha abajo", "DOWN"],
+              ["flecha izquierda", "LEFT"],
+              ["flecha derecha", "RIGHT"],
+            ],
+          },
+        ],
+        nextStatement: null,
+        colour: 290,
+      },
+    ]);
 
-  // Función para manejar el inicio del drag
-  const manejarDragStart = (e, bloque) => {
-    e.dataTransfer.setData("text", bloque);
-  };
-
-  // Función para manejar el "devolvimiento" del bloque al menú de categorías
-  const manejarDropCategoria = (e, categoriaId) => {
-    e.preventDefault();
-    const data = e.dataTransfer.getData("text");
-
-    // Verificar si el bloque ya está en alguna de las categorías
-    const bloqueYaExiste = categorias.some((cat) =>
-      cat.bloques.includes(data)
-    );
-
-    // Si no existe en ninguna categoría, añadirlo a la categoría seleccionada
-    if (!bloqueYaExiste) {
-      setCategorias((prevCategorias) =>
-        prevCategorias.map((cat) =>
-          cat.id === categoriaId
-            ? { ...cat, bloques: [...cat.bloques, data] }
-            : cat
-        )
-      );
-    }
-  };
-
-  // Permitir el "drop" en el área de categorías
-  const permitirDropCategoria = (e) => {
-    e.preventDefault();
-  };
-
-  // Función para permitir la edición de un bloque
-  const editarBloque = (bloque, nuevaValor) => {
-    // Actualizar el valor del bloque en el código
-    const nuevoCodigo = codigo.replace(bloque, nuevaValor);
-    setCodigo(nuevoCodigo);
-  };
+    return () => workspace.dispose();
+  }, []);
 
   const cargarAlMbot = () => {
-    console.log("Cargar al mBot:", codigo);
-    alert("Código cargado al mBot: \n" + codigo);
+    const workspace = Blockly.getMainWorkspace();
+    const code = Blockly.JavaScript.workspaceToCode(workspace);
+    console.log("Código generado:", code);
+    alert("Código cargado al mBot: \n" + code);
   };
 
   return (
@@ -98,66 +196,26 @@ const Bloques = () => {
           className="logo1"
           onClick={() => navigate("/")}
         />
+
         {/* Contenido principal */}
         <div className="main-content">
-          {/* Menú lateral izquierdo */}
-          <div className="sidebar">
-            <h2 className="sidebar-title">Categorías</h2>
-            <ul className="categories-list">
-              {categorias.map((cat) => (
-                <li key={cat.id} className="category-item">
-                  <h3 className="category-title">{cat.nombre}</h3>
-                  <ul
-                    className="blocks-list"
-                    onDrop={(e) => manejarDropCategoria(e, cat.id)} // Permitir drop en la categoría
-                    onDragOver={permitirDropCategoria} // Permitir el drag
-                  >
-                    {cat.bloques.map((bloque, index) => (
-                      <li
-                        key={index}
-                        className="block-item"
-                        draggable
-                        onDragStart={(e) => manejarDragStart(e, bloque)} // Hacer que el bloque sea arrastrable
-                      >
-                        <ScratchBlocks blockStyle="scratch3" languages={["es"]}>
-                          {bloque}
-                        </ScratchBlocks>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ))}
-            </ul>
-          </div>
-          {/* Área de edición */}
-          <div className="editor">
-            <header className="editor-header">
-              <h1 className="editor-title">Editor de Bloques</h1>
-              <button className="load-button" onClick={cargarAlMbot}>
-                Cargar al mBot
-              </button>
-            </header>
-            <div
-              className="editor-workspace"
-              onDrop={manejarDrop}
-              onDragOver={permitirDrop}
-            >
-              {/* Aquí manejamos la edición de bloques */}
-              <ScratchBlocks blockStyle="scratch3" languages={["es"]}>
-                {codigo}
-              </ScratchBlocks>
-            </div>
-          </div>
+          <header className="editor-header">
+            <h1 className="editor-title">Editor de Bloques</h1>
+            <button className="load-button" onClick={cargarAlMbot}>
+              Cargar al mBot
+            </button>
+          </header>
+
+          {/* Área de trabajo de Blockly */}
+          <div
+            ref={workspaceRef}
+            style={{
+              width: "100%",
+              height: "600px",
+              border: "1px solid #ccc",
+            }}
+          ></div>
         </div>
-      </div>
-      {/* Cuadro de edición del código (consola) abajo a la derecha */}
-      <div className="console">
-        <textarea
-          value={codigo}
-          onChange={(e) => setCodigo(e.target.value)}
-          rows="10"
-          cols="30"
-        />
       </div>
     </div>
   );
