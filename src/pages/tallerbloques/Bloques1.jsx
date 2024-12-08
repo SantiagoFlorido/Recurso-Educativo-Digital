@@ -3,7 +3,7 @@ import ScratchBlocks from "scratchblocks-react";
 //import "./Bloques.css";
 import { useNavigate } from "react-router-dom";
 import scratchblocks from "scratchblocks";
-import es from "scratchblocks/locales/es.json";
+import es from "scratchblocks/locales/es-419.json";
 
 // Configurar scratchblocks con idioma español
 scratchblocks.loadLanguages({ es });
@@ -14,22 +14,24 @@ const Bloques = () => {
   const [categorias, setCategorias] = useState([
     {
       id: 1,
-      nombre: "Movimiento",
-      bloques: ["mover (1) pasos", "girar a la derecha (45) grados"],
+      nombre: "Eventos",
+      bloques: ["al presionar @greenFlag"],
     },
     {
       id: 2,
-      nombre: "Control",
-      bloques: ["esperar (5) segundos", "repetir (1)"],
+      nombre: "Movimiento",
+      bloques: ["mover (10) pasos","apuntar en dirección (30)", "ir a x: (-209) y: (-7)"],
     },
     {
       id: 3,
-      nombre: "Eventos",
-      bloques: [
-        "al hacer clic en @greenFlag",
-        "al presionar tecla (spacebar)",
-      ],
+      nombre: "Control",
+      bloques: ["repetir (8)"],
     },
+    {
+      id: 4,
+      nombre: "Apariencia",
+      bloques: ["decir (hola) durante (2) segundos"],
+    }
   ]);
 
   // Función para agregar el bloque arrastrado al área de trabajo

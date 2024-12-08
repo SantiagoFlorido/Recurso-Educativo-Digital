@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import ScratchBlocks from "scratchblocks-react";
-//import "./Bloques.css";
+import "./tallerbloques.css";
 import { useNavigate } from "react-router-dom";
 import scratchblocks from "scratchblocks";
 import es from "scratchblocks/locales/es.json";
@@ -28,9 +28,11 @@ const Bloques = () => {
       bloques: [
         "al hacer clic en @greenFlag",
         "al presionar tecla (spacebar)",
+        "cuando tecla (flecha abajo ↓) pulsada", // Bloque con flecha abajo
       ],
     },
   ]);
+  
 
   // Función para agregar el bloque arrastrado al área de trabajo
   const manejarDrop = (e) => {

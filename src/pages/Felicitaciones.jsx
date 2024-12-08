@@ -15,7 +15,8 @@ const Felicitaciones = () => {
           className="logo1"
           onClick={() => navigate('/Proyectos')}
         />
-        <div>hola xd</div>
+        <img className='felicitaciones' src="src/images/felicitaciones.webp" alt="felicitaciones" />
+        <button className='felicitaciones_button' onClick={() => navigate('/Proyectos')}>Regresar al inicio</button>
       </div>
     </div>
   );

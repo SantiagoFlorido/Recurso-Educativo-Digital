@@ -1,0 +1,27 @@
+.felicitaciones {
+    width: 70%;
+    height: 70%;
+}
+
+.felicitaciones_button {
+    background-color: rgb(26, 179, 26);
+    border-radius: 30px;
+    width: 18%;
+    height: 10%;
+    font-size: calc(1rem + 1vw); /* Escala la fuente según el ancho de la pantalla */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: all 0.3s ease; /* Para suavizar los efectos */
+}
+
+.felicitaciones_button:hover {
+    background-color: rgb(80, 194, 80);
+    border-radius: 32px;
+    width: 19%;
+    height: 11%;
+    font-size: calc(1.1rem + 1vw); /* Incrementa un poco la escala al hover */
+    cursor: pointer;
+}
