@@ -1,15 +1,12 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import ScratchBlocks from "scratchblocks-react";
-//import "./Bloques.css";
 import { useNavigate } from "react-router-dom";
+import FlagIcon from '@mui/icons-material/Flag';
 import scratchblocks from "scratchblocks";
 import es from "scratchblocks/locales/es-419.json";
 import ess from "scratchblocks/locales/es.json";
 
-// Importa el ícono de la bandera verde desde Material UI
-import FlagIcon from '@mui/icons-material/Flag';
-
-// Configurar scratchblocks con idioma español
+// Cargar idiomas para ScratchBlocks
 scratchblocks.loadLanguages({ es });
 scratchblocks.loadLanguages({ ess });
 
@@ -20,7 +17,7 @@ const Bloques = () => {
     {
       id: 1,
       nombre: "Movimiento",
-      bloques: ["mover (10) pasos","apuntar en dirección (30)", "ir a x: (-209) y: (-7)"],
+      bloques: ["mover (100) pasos", "apuntar en dirección (290)", "ir a x: (1250) y: (350)"],
     },
     {
       id: 2,
@@ -38,6 +35,113 @@ const Bloques = () => {
       bloques: ["al hacer clic en @greenFlag"],
     },
   ]);
+
+  /*     Solucion para pegar en el cuadro de texto
+    al hacer clic en @greenFlag
+    apuntar en dirección (290)
+    mover (100) pasos
+    apuntar en dirección (65)
+    mover (260) pasos
+    apuntar en dirección (325)
+    mover (400) pasos
+  */
+
+  // Actualiza la posición inicial del panda a { x: 1250, y: 350 } y la dirección a 0 (sin rotar)
+  const [posicionPanda, setPosicionPanda] = useState({ x: 1250, y: 350, direccion: 0 });
+  
+  // Estado para el mensaje del panda
+  const [mensajePanda, setMensajePanda] = useState("");
+
+  // Función para mover el panda
+  const moverPanda = async (accion) => {
+    switch (accion.tipo) {
+      case "mover":
+        setPosicionPanda((prev) => ({
+          ...prev,
+          x: prev.x + accion.valor * Math.cos((prev.direccion * Math.PI) / 180), // Movimiento en la dirección actual
+          y: prev.y + accion.valor * Math.sin((prev.direccion * Math.PI) / 180),
+        }));
+        break;
+      case "apuntar":
+        setPosicionPanda((prev) => ({
+          ...prev,
+          direccion: accion.valor, // Cambiar la dirección
+        }));
+        break;
+      case "ir_a":
+        setPosicionPanda({ x: accion.x, y: accion.y, direccion: 0 });
+        break;
+      case "decir":
+        setMensajePanda(accion.mensaje); // Mostrar el mensaje del panda
+        await new Promise((resolve) => setTimeout(resolve, accion.duracion * 1000)); // Esperar los segundos
+        setMensajePanda(""); // Limpiar el mensaje después de la duración
+        break;
+      case "repetir":
+        for (let i = 0; i < accion.veces; i++) {
+          // Ejecutar las acciones repetidas
+          for (const subAccion of accion.subacciones) {
+            await moverPanda(subAccion);
+          }
+        }
+        break;
+      default:
+        break;
+    }
+  };
+
+  // Función para ejecutar el código al hacer clic en la bandera verde
+  const ejecutarCodigo = async () => {
+    const instrucciones = procesarCodigo(codigo);
+
+    // Ejecutar cada instrucción y mover el panda
+    for (const accion of instrucciones) {
+      await moverPanda(accion); // Esperar a que cada acción termine antes de pasar a la siguiente
+    }
+  };
+
+  // Función para procesar el código en formato de bloques (convertir el código a instrucciones)
+  const procesarCodigo = (codigo) => {
+    const instrucciones = [];
+
+    // Dividir el código por líneas y extraer las instrucciones
+    const lineas = codigo.split("\n");
+
+    lineas.forEach((linea) => {
+      if (linea.includes("mover")) {
+        const valor = parseInt(linea.match(/\d+/)[0]);
+        instrucciones.push({ tipo: "mover", valor });
+      } else if (linea.includes("ir a x:")) {
+        const [x, y] = linea.match(/-?\d+/g).map((num) => parseInt(num));
+        instrucciones.push({ tipo: "ir_a", x, y });
+      } else if (linea.includes("decir")) {
+        const mensaje = linea.match(/\(([^)]+)\)/)[1]; // Extraer el mensaje
+        const duracion = parseInt(linea.match(/\d+/g)[1]); // Extraer la duración
+        instrucciones.push({ tipo: "decir", mensaje, duracion });
+      } else if (linea.includes("repetir")) {
+        const veces = parseInt(linea.match(/\d+/)[0]); // Extraer el número de repeticiones
+        const subacciones = []; // Almacenar las subacciones dentro del bloque repetir
+
+        // Procesar las subacciones dentro del bloque repetir
+        const subCodigo = codigo.split("\n").slice(lineas.indexOf(linea) + 1);
+        subCodigo.forEach((subLinea) => {
+          if (subLinea.includes("mover")) {
+            const valor = parseInt(subLinea.match(/\d+/)[0]);
+            subacciones.push({ tipo: "mover", valor });
+          } else if (subLinea.includes("ir a x:")) {
+            const [x, y] = subLinea.match(/-?\d+/g).map((num) => parseInt(num));
+            subacciones.push({ tipo: "ir_a", x, y });
+          }
+        });
+
+        instrucciones.push({ tipo: "repetir", veces, subacciones });
+      } else if (linea.includes("apuntar en dirección")) {
+        const direccion = parseInt(linea.match(/\d+/)[0]); // Extraer la dirección
+        instrucciones.push({ tipo: "apuntar", valor: direccion });
+      }
+    });
+
+    return instrucciones;
+  };
 
   // Función para agregar el bloque arrastrado al área de trabajo
   const manejarDrop = (e) => {
@@ -83,29 +187,15 @@ const Bloques = () => {
     e.preventDefault();
   };
 
-  // Función para permitir la edición de un bloque
-  const editarBloque = (bloque, nuevaValor) => {
-    // Actualizar el valor del bloque en el código
-    const nuevoCodigo = codigo.replace(bloque, nuevaValor);
-    setCodigo(nuevoCodigo);
-  };
-
-  const cargarAlMbot = () => {
-    console.log("Cargar al mBot:", codigo);
-    alert("Código cargado al mBot: \n" + codigo);
-  };
-
   return (
     <div className="container">
       <div className="inner-container">
-        {/* Logo */}
         <img
           src="src/images/logo.webp"
           alt="logo"
           className="logo1"
           onClick={() => navigate("/Proyectos")}
         />
-        {/* Contenido principal */}
         <div className="main-content">
           {/* Menú lateral izquierdo */}
           <div className="sidebar">
@@ -136,13 +226,13 @@ const Bloques = () => {
               ))}
             </ul>
           </div>
+
           {/* Área de edición */}
           <div className="editor">
             <header className="editor-header">
               <h1 className="editor-title">Editor de Bloques</h1>
-              {/* Aquí reemplazamos el texto por el ícono de la bandera verde */}
-              <button className="load-button2">
-                <FlagIcon className="iconFlag" style={{ color: "green"}} />
+              <button className="load-button2" onClick={ejecutarCodigo}>
+                <FlagIcon className="iconFlag" style={{ color: "green" }} />
               </button>
               <button className="load-button" onClick={() => navigate('/Felicitaciones')}>
                 Finalizar Actividad
@@ -153,7 +243,6 @@ const Bloques = () => {
               onDrop={manejarDrop}
               onDragOver={permitirDrop}
             >
-              {/* Aquí manejamos la edición de bloques */}
               <ScratchBlocks blockStyle="scratch3" languages={["es"]}>
                 {codigo}
               </ScratchBlocks>
@@ -161,9 +250,23 @@ const Bloques = () => {
           </div>
         </div>
       </div>
-      {/* Cuadro de edición del código (consola) abajo a la derecha */}
-      <img src="src/images/mapa.webp" alt="mapa" className="red-square"/>
-      <img src="src/images/panda.webp" alt="panda" className="panda" />
+
+      {/* Imagen del mapa */}
+      <img src="src/images/mapa.webp" alt="mapa" className="red-square" />
+      
+      {/* Panda */}
+      <img
+        src="src/images/panda.webp"
+        alt="panda"
+        className="panda"
+        style={{
+          left: `${posicionPanda.x}px`,
+          top: `${posicionPanda.y}px`,
+          transform: `rotate(${posicionPanda.direccion}deg)`, // Rotar la imagen del panda
+        }}
+      />
+
+      {/* Consola para código */}
       <div className="console">
         <textarea
           value={codigo}
@@ -172,6 +275,11 @@ const Bloques = () => {
           cols="30"
         />
       </div>
+
+      {/* Mostrar el mensaje del panda */}
+      {mensajePanda && (
+        <div className="mensaje-panda">{mensajePanda}</div>
+      )}
     </div>
   );
 };
