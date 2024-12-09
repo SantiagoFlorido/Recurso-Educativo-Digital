@@ -38,6 +38,7 @@ const Bloques = () => {
 
   /*     Solucion para pegar en el cuadro de texto
     al hacer clic en @greenFlag
+    ir a x: (1250) y: (350)
     apuntar en dirección (290)
     mover (100) pasos
     apuntar en dirección (65)
