@@ -6,6 +6,26 @@
   height: 100%;
 }
 
+/* Cuadrado rojo encima de la consola */
+.red-square {
+  position: absolute;
+  top: 20%; /* Ajusta la distancia desde la parte superior de la pantalla */
+  right: 3%; /* Mantén el margen derecho igual */
+  width: 32%; /* Tamaño del cuadrado */
+  height: 45%; /* Tamaño del cuadrado */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Opcional: agrega sombra para más estilo */
+}
+
+.panda{
+  position: absolute;
+  top: 38%; /* Ajusta la distancia desde la parte superior de la pantalla */
+  right: 31%; /* Mantén el margen derecho igual */
+  width: 4%; /* Tamaño del cuadrado */
+  height: 9%; /* Tamaño del cuadrado */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Opcional: agrega sombra para más estilo */
+}
+
+
 /* Menú lateral izquierdo */
 .sidebar {
   width: 20%; /* Mantiene el 20% del ancho para el menú lateral */
@@ -56,6 +76,7 @@
   display: flex;
   flex-direction: column;
   height: 100%; /* Asegura que ocupe todo el espacio restante */
+  
 }
 
 .editor-header {
@@ -84,6 +105,7 @@
   flex: 1;
   padding: 1rem;
   overflow-y: auto; /* Permite desplazamiento vertical si el contenido excede el área visible */
+  width: 60%;
 }
 
 /* Cuadro de consola (textarea) */
@@ -91,8 +113,8 @@
   position: absolute;
   bottom: 10%;
   right: 5%;
-  width: 300px;
-  height: 200px;
+  width: 30%;
+  height: 20%;
   background-color: white;
   border: 1px solid #ddd;
   padding: 10px;

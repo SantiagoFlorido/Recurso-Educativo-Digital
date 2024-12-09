@@ -4,9 +4,14 @@ import ScratchBlocks from "scratchblocks-react";
 import { useNavigate } from "react-router-dom";
 import scratchblocks from "scratchblocks";
 import es from "scratchblocks/locales/es-419.json";
+import ess from "scratchblocks/locales/es.json";
+
+// Importa el ícono de la bandera verde desde Material UI
+import FlagIcon from '@mui/icons-material/Flag';
 
 // Configurar scratchblocks con idioma español
 scratchblocks.loadLanguages({ es });
+scratchblocks.loadLanguages({ ess });
 
 const Bloques = () => {
   const navigate = useNavigate();
@@ -14,24 +19,24 @@ const Bloques = () => {
   const [categorias, setCategorias] = useState([
     {
       id: 1,
-      nombre: "Eventos",
-      bloques: ["al presionar @greenFlag"],
-    },
-    {
-      id: 2,
       nombre: "Movimiento",
       bloques: ["mover (10) pasos","apuntar en dirección (30)", "ir a x: (-209) y: (-7)"],
     },
     {
-      id: 3,
+      id: 2,
       nombre: "Control",
       bloques: ["repetir (8)"],
     },
     {
-      id: 4,
+      id: 3,
       nombre: "Apariencia",
       bloques: ["decir (hola) durante (2) segundos"],
-    }
+    },
+    {
+      id: 4,
+      nombre: "Eventos",
+      bloques: ["al hacer clic en @greenFlag"],
+    },
   ]);
 
   // Función para agregar el bloque arrastrado al área de trabajo
@@ -135,8 +140,9 @@ const Bloques = () => {
           <div className="editor">
             <header className="editor-header">
               <h1 className="editor-title">Editor de Bloques</h1>
-              <button className="load-button" /*onClick={cargarAlMbot}*/>
-                bandera verde "aun no programada"
+              {/* Aquí reemplazamos el texto por el ícono de la bandera verde */}
+              <button className="load-button2">
+                <FlagIcon className="iconFlag" style={{ color: "green"}} />
               </button>
               <button className="load-button" onClick={() => navigate('/Felicitaciones')}>
                 Finalizar Actividad
@@ -156,6 +162,8 @@ const Bloques = () => {
         </div>
       </div>
       {/* Cuadro de edición del código (consola) abajo a la derecha */}
+      <img src="src/images/mapa.webp" alt="mapa" className="red-square"/>
+      <img src="src/images/panda.webp" alt="panda" className="panda" />
       <div className="console">
         <textarea
           value={codigo}

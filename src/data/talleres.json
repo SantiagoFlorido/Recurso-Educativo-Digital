@@ -2,7 +2,7 @@
   { 
     "id": 1,
     "titulo": "Taller 1 Introducción a app",
-    "imagen": "src/images/mapa.png",
+    "imagen": "src/images/mapa.webp",
     "slides": [
       "src/images/taller1/taller1slide1.webp",
       "src/images/taller1/taller1slide2.webp",
@@ -17,7 +17,7 @@
   {
     "id": 2,
     "titulo": "Taller 2 Ensamblado del mBot",
-    "imagen": "src/images/piezas.jpg",
+    "imagen": "src/images/piezas.webp",
     "slides": [
       "src/images/taller2/taller2slide1.webp",
       "src/images/taller2/taller2slide2.webp",
@@ -46,7 +46,7 @@
   {
     "id": 3,
     "titulo": "Taller 3 Programar el Movimiento",
-    "imagen": "src/images/conectar.jpg",
+    "imagen": "src/images/conectar.webp",
     "slides": [
       "src/images/taller3/taller3slide1.webp",
       "src/images/taller3/taller3slide2.webp",
@@ -57,7 +57,7 @@
   {
     "id": 4,
     "titulo": "Taller 4 Sensor Ultrasonido",
-    "imagen": "src/images/sensor4.jpeg",
+    "imagen": "src/images/sensor4.webp",
     "slides": [
       "src/images/taller4/taller4slide1.webp",
       "src/images/taller4/taller4slide2.webp"
@@ -66,7 +66,7 @@
   {
     "id": 5,
     "titulo": "Taller 5 Seguidor de Línea",
-    "imagen": "src/images/linea5.jpeg",
+    "imagen": "src/images/linea5.webp",
     "slides": [
       "src/images/taller5/taller5slide1.webp",
       "src/images/taller5/taller5slide2.webp"

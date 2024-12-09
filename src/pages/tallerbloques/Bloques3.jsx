@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import ScratchBlocks from "scratchblocks-react";
 import "./tallerbloques.css";
 import { useNavigate } from "react-router-dom";
@@ -28,7 +28,6 @@ const Bloques = () => {
       bloques: [
         "al hacer clic en @greenFlag",
         "al presionar tecla (spacebar)",
-        "cuando tecla (flecha abajo ↓) pulsada", // Bloque con flecha abajo
       ],
     },
   ]);
