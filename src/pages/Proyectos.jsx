@@ -37,6 +37,12 @@ const Proyectos = () => {
             </div>
           ))}
         </div>
+        <img
+          src="src/images/dashboard-icon.webp"
+          alt="logo"
+          className="dashboard"
+          onClick={() => navigate('/dashboard')}
+        />
       </div>
     </div>
   );

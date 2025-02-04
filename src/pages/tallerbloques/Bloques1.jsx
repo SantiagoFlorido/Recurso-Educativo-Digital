@@ -5,6 +5,7 @@ import FlagIcon from '@mui/icons-material/Flag';
 import scratchblocks from "scratchblocks";
 import es from "scratchblocks/locales/es-419.json";
 import ess from "scratchblocks/locales/es.json";
+import axios from "axios";
 
 // Cargar idiomas para ScratchBlocks
 scratchblocks.loadLanguages({ es });
@@ -12,6 +13,23 @@ scratchblocks.loadLanguages({ ess });
 
 const Bloques = () => {
   const navigate = useNavigate();
+  const URL = "https://recursoeducativodigital.onrender.com/api/v1/talleres/1";
+
+  const finalizarActividad = async () => {
+    try {
+      // Obtener el taller actual para saber el totalCompleted actual
+      const response = await axios.get(URL);
+      const totalActual = response.data.totalCompleted || 0;
+      
+      // Enviar el PATCH para actualizar el totalCompleted
+      await axios.patch(URL, { totalCompleted: totalActual + 1 });
+      
+      // Redirigir a la pantalla de felicitaciones
+      navigate("/Felicitaciones");
+    } catch (error) {
+      console.error("Error al actualizar el totalCompleted", error);
+    }
+  };
   const [codigo, setCodigo] = useState(""); // Mantener el código de bloques
   const [categorias, setCategorias] = useState([
     {
@@ -235,7 +253,7 @@ const Bloques = () => {
               <button className="load-button2" onClick={ejecutarCodigo}>
                 <FlagIcon className="iconFlag" style={{ color: "green" }} />
               </button>
-              <button className="load-button" onClick={() => navigate('/Felicitaciones')}>
+              <button className="load-button" onClick={finalizarActividad}>
                 Finalizar Actividad
               </button>
             </header>

@@ -1,0 +1,91 @@
+.talleres-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .taller-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .nombre-talleres {
+    flex: 1;
+    text-align: left;
+    font-size: 2rem;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .progress-bar-container {
+    flex: 1; /* Hace que la barra ocupe el espacio disponible */
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    position: relative; /* Necesario para posicionar las etiquetas encima de la barra */
+    height: 20px; /* Altura para el área de la barra */
+  }
+  
+  .progress-bar {
+    height: 20px;
+    background-color: #4caf50;
+    text-align: center;
+    color: black;
+    font-size: 0.9rem;
+    line-height: 20px;
+    transition: width 0.5s ease-in-out;
+  }
+  
+  /* Contenedor de las etiquetas 0 y 1000 */
+  .progress-labels {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    top: -20px; /* Ubica las etiquetas encima de la barra */
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  .progress-labels span {
+    position: relative;
+    top: 5px; /* Ajusta la posición vertical de las etiquetas */
+  }
+
+
+  .Volver-dashboard{
+    width: 18%;
+    height: 10%;
+    position: absolute; /* Posicionarlo de manera absoluta */
+    top: 80%; /* Alineado en la parte superior */
+    right: 40%; /* Alineado a la izquierda */
+    margin: 0;
+    cursor: pointer;
+    background-color: rgb(26, 179, 26);
+    border-radius: 30px;
+    font-size: calc(1rem + 1vw); /* Escala la fuente según el ancho de la pantalla */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: all 0.3s ease; /* Para suavizar los efectos */
+  }
+
+  .Volver-dashboard:hover{
+    background-color: rgb(80, 194, 80);
+    border-radius: 32px;
+    width: 19%;
+    height: 11%;
+    font-size: calc(1.1rem + 1vw); /* Incrementa un poco la escala al hover */
+    cursor: pointer;
+  }
+
+
+ 
+
+
+  

@@ -4,9 +4,11 @@ import './ComoUsar.css';
 import IconButton from '@mui/material/IconButton';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import axios from "axios";
 
 const ComoUsar = () => {
   const navigate = useNavigate();
+  const URL = "https://recursoeducativodigital.onrender.com/api/v1/talleres/2";
   const location = useLocation();
   const { state } = location || {};
   const taller = state?.taller;
@@ -102,14 +104,30 @@ const ComoUsar = () => {
           alt={`Slide ${currentSlide + 1}`}
           className="slider-image"
         />
-
+        
         <div className="button">
           {/* Botón siguiente (navegación a otra ruta) */}
           <IconButton
             className="next-button"
-            onClick={() => {
-              // Aquí pasamos el taller como estado al navegar
-              navigate(getNextRoute(), { state: { taller } });
+            onClick={async () => {
+              if (id === 2) {
+                try {
+                  // Obtener el totalCompleted actual
+                  const response = await axios.get(URL);
+                  const totalActual = response.data.totalCompleted || 0;
+
+                  // Enviar el PATCH para incrementar totalCompleted
+                  await axios.patch(URL, { totalCompleted: totalActual + 1 });
+
+                  // Navegar a Felicitaciones
+                  navigate('/Felicitaciones');
+                } catch (error) {
+                  console.error("Error al actualizar el totalCompleted", error);
+                }
+              } else {
+                // Navegación normal para otros talleres
+                navigate(getNextRoute(), { state: { taller } });
+              }
             }}
           >
             <ArrowForwardIcon style={{ fontSize: '5rem' }} />

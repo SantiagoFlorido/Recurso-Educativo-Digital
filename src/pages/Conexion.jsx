@@ -44,7 +44,7 @@ const Conexion = () => {
 
   const connectToComPort = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/serial');
+      const response = await axios.get('https://recursoeducativodigital.onrender.com/api/v1/serial');
       setComPorts(response.data.ports);
       setIsConnected(true);
       alert('Conexión al puerto COM establecida');

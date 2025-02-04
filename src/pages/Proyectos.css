@@ -5,7 +5,7 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
-    width: calc(100% - 400px); /* Reducimos el ancho para dar espacio a los lados */
+    width: calc(100% - 300px); /* Reducimos el ancho para dar espacio a los lados */
     margin-top: 140px;
     box-sizing: border-box;
     overflow-y: auto; /* Permitir desplazamiento vertical si el contenido es largo */
@@ -63,4 +63,24 @@
     padding: 10px;
     cursor: pointer;
   }
+
+  .dashboard {
+    width: 4%;
+    height: 8.5%;
+    position: absolute; /* Posicionarlo de manera absoluta */
+    top: 1.8%; /* Alineado en la parte superior */
+    right: 1%; /* Alineado a la izquierda */
+    margin: 0;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Para suavizar los efectos */
+  }
+
+  .dashboard:hover{
+    font-size: calc(1.1rem + 1vw); /* Incrementa un poco la escala al hover */
+    cursor: pointer;
+    width: 4.5%;
+    height: 9.5%;
+  }
+
+
   

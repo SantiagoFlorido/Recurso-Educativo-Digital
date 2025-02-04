@@ -4,12 +4,31 @@ import "./tallerbloques.css";
 import { useNavigate } from "react-router-dom";
 import scratchblocks from "scratchblocks";
 import es from "scratchblocks/locales/es.json";
+import axios from "axios";
+
 
 // Configurar scratchblocks con idioma español
 scratchblocks.loadLanguages({ es });
 
 const Bloques = () => {
   const navigate = useNavigate();
+  const URL = "https://recursoeducativodigital.onrender.com/api/v1/talleres/5";
+
+  const finalizarActividad = async () => {
+    try {
+      // Obtener el taller actual para saber el totalCompleted actual
+      const response = await axios.get(URL);
+      const totalActual = response.data.totalCompleted || 0;
+      
+      // Enviar el PATCH para actualizar el totalCompleted
+      await axios.patch(URL, { totalCompleted: totalActual + 1 });
+      
+      // Redirigir a la pantalla de felicitaciones
+      navigate("/Felicitaciones");
+    } catch (error) {
+      console.error("Error al actualizar el totalCompleted", error);
+    }
+  };
   const [codigo, setCodigo] = useState(""); // Mantener el código de bloques
   const [categorias, setCategorias] = useState([
     {
@@ -136,7 +155,7 @@ const Bloques = () => {
               <button className="load-button" onClick={cargarAlMbot}>
                 Cargar al mBot
               </button>
-              <button className="load-button" onClick={() => navigate('/Felicitaciones')}>
+              <button className="load-button" onClick={finalizarActividad}>
                 Finalizar Actividad
               </button>
             </header>
