@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Proyectos.css';
-import talleresData from '../data/talleres.json';
+import talleresData from '../../data/talleres.json';
 
 const Proyectos = () => {
   const navigate = useNavigate();

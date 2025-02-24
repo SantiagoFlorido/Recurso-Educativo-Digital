@@ -1,16 +1,16 @@
 import { Routes, Route } from 'react-router-dom'; // Importar Routes y Route para definir las rutas
-import Inicio from './pages/Inicio'; // Importa el componente de la página Inicio
+import Inicio from './pages/paginaInicio/Inicio'; // Importa el componente de la página Inicio
 import './App.css';
-import Conexion from './pages/Conexion';
-import ComoUsar from './pages/ComoUsar';
-import Proyectos from './pages/Proyectos';
-import Bloques from './pages/Bloques';
-import BloquesTest from './pages/BloquesTest';
+import Conexion from './pages/ConexionMbot/Conexion';
+import ComoUsar from './pages/tallerContenido/ComoUsar';
+import Proyectos from './pages/catalogoProyectos/Proyectos';
+import Bloques from './pages/bloquesTest/Bloques';
+import BloquesTest from './pages/bloquesTest/BloquesTest';
 import Bloques1 from './pages/tallerbloques/Bloques1';
 import Bloques3 from './pages/tallerbloques/Bloques3';
 import Bloques4 from './pages/tallerbloques/Bloques4';
 import Bloques5 from './pages/tallerbloques/Bloques5';
-import Felicitaciones from './pages/Felicitaciones';
+import Felicitaciones from './pages/finalizarTaller/Felicitaciones';
 import Dashboard from './pages/dashboard/Dashboard';
 
 function App() {

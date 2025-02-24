@@ -73,6 +73,7 @@
     justify-content: center;
     text-align: center;
     transition: all 0.3s ease; /* Para suavizar los efectos */
+    border: none;
   }
 
   .Volver-dashboard:hover{
